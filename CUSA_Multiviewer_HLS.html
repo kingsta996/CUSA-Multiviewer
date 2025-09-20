@@ -1,0 +1,310 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>CUSA Multiviewer (HLS)</title>
+  <style>
+    :root { --gap: 12px; }
+    * { box-sizing: border-box; }
+    html, body {
+      margin: 0; padding: 0; height: 100%; background: #0f1115; color: #eaeef3;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    }
+    header {
+      padding: 10px 14px; background: #151823; border-bottom: 1px solid #232737;
+      display: flex; align-items: center; gap: 12px; flex-wrap: wrap;
+    }
+    header h1 { font-size: 16px; margin: 0; font-weight: 600; }
+    header .controls { display: flex; gap: 8px; flex-wrap: wrap; }
+    button, select {
+      background: #1e2433; color: #eaeef3; border: 1px solid #2a3042; border-radius: 8px;
+      padding: 8px 10px; cursor: pointer; font-size: 13px;
+    }
+    button:hover { background: #242b3e; }
+    main {
+      height: calc(100% - 56px);
+      padding: var(--gap);
+    }
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+      gap: var(--gap);
+      height: 100%;
+    }
+    .tile {
+      background: #141824; border: 1px solid #232737; border-radius: 14px;
+      display: flex; flex-direction: column; overflow: hidden; min-height: 200px;
+    }
+    .video-wrap { position: relative; aspect-ratio: 16 / 9; background: #000; }
+    video {
+      width: 100%; height: 100%; display: block; background: #000;
+    }
+    .label {
+      padding: 8px 10px; font-size: 13px; border-top: 1px solid #232737;
+      display: flex; align-items: center; justify-content: space-between; gap: 8px;
+    }
+    .row-controls { display: flex; gap: 6px; }
+  </style>
+  <script src="https://cdn.jsdelivr.net/npm/hls.js@1.5.7/dist/hls.min.js" crossorigin="anonymous"></script>
+</head>
+<body>
+  <header>
+    <h1>CUSA Multiviewer</h1>
+    <div class="controls">
+      <button id="playAll">Play All</button>
+      <button id="pauseAll">Pause All</button>
+      <button id="muteAll">Mute All</button>
+      <button id="unmuteAll">Unmute All</button>
+      <label style="display:inline-flex;align-items:center;gap:6px;">
+        Volume
+        <input id="volume" type="range" min="0" max="1" step="0.05" value="0.0" />
+      </label>
+    </div>
+  </header>
+  <main>
+    <div class="grid">
+
+      <div class="tile" data-name="CUSA1">
+        <div class="video-wrap">
+          <video id="vid_CUSA1" playsinline muted></video>
+        </div>
+        <div class="label">
+          <div><strong>CUSA1</strong></div>
+          <div class="row-controls">
+            <button data-action="play" data-target="vid_CUSA1">Play</button>
+            <button data-action="pause" data-target="vid_CUSA1">Pause</button>
+            <button data-action="mute" data-target="vid_CUSA1">Mute</button>
+            <button data-action="unmute" data-target="vid_CUSA1">Unmute</button>
+          </div>
+        </div>
+      </div>
+    
+      <div class="tile" data-name="CUSA2">
+        <div class="video-wrap">
+          <video id="vid_CUSA2" playsinline muted></video>
+        </div>
+        <div class="label">
+          <div><strong>CUSA2</strong></div>
+          <div class="row-controls">
+            <button data-action="play" data-target="vid_CUSA2">Play</button>
+            <button data-action="pause" data-target="vid_CUSA2">Pause</button>
+            <button data-action="mute" data-target="vid_CUSA2">Mute</button>
+            <button data-action="unmute" data-target="vid_CUSA2">Unmute</button>
+          </div>
+        </div>
+      </div>
+    
+      <div class="tile" data-name="CUSA3">
+        <div class="video-wrap">
+          <video id="vid_CUSA3" playsinline muted></video>
+        </div>
+        <div class="label">
+          <div><strong>CUSA3</strong></div>
+          <div class="row-controls">
+            <button data-action="play" data-target="vid_CUSA3">Play</button>
+            <button data-action="pause" data-target="vid_CUSA3">Pause</button>
+            <button data-action="mute" data-target="vid_CUSA3">Mute</button>
+            <button data-action="unmute" data-target="vid_CUSA3">Unmute</button>
+          </div>
+        </div>
+      </div>
+    
+      <div class="tile" data-name="CUSA4">
+        <div class="video-wrap">
+          <video id="vid_CUSA4" playsinline muted></video>
+        </div>
+        <div class="label">
+          <div><strong>CUSA4</strong></div>
+          <div class="row-controls">
+            <button data-action="play" data-target="vid_CUSA4">Play</button>
+            <button data-action="pause" data-target="vid_CUSA4">Pause</button>
+            <button data-action="mute" data-target="vid_CUSA4">Mute</button>
+            <button data-action="unmute" data-target="vid_CUSA4">Unmute</button>
+          </div>
+        </div>
+      </div>
+    
+      <div class="tile" data-name="CUSA5">
+        <div class="video-wrap">
+          <video id="vid_CUSA5" playsinline muted></video>
+        </div>
+        <div class="label">
+          <div><strong>CUSA5</strong></div>
+          <div class="row-controls">
+            <button data-action="play" data-target="vid_CUSA5">Play</button>
+            <button data-action="pause" data-target="vid_CUSA5">Pause</button>
+            <button data-action="mute" data-target="vid_CUSA5">Mute</button>
+            <button data-action="unmute" data-target="vid_CUSA5">Unmute</button>
+          </div>
+        </div>
+      </div>
+    
+      <div class="tile" data-name="CUSA6">
+        <div class="video-wrap">
+          <video id="vid_CUSA6" playsinline muted></video>
+        </div>
+        <div class="label">
+          <div><strong>CUSA6</strong></div>
+          <div class="row-controls">
+            <button data-action="play" data-target="vid_CUSA6">Play</button>
+            <button data-action="pause" data-target="vid_CUSA6">Pause</button>
+            <button data-action="mute" data-target="vid_CUSA6">Mute</button>
+            <button data-action="unmute" data-target="vid_CUSA6">Unmute</button>
+          </div>
+        </div>
+      </div>
+    
+      <div class="tile" data-name="CUSA7">
+        <div class="video-wrap">
+          <video id="vid_CUSA7" playsinline muted></video>
+        </div>
+        <div class="label">
+          <div><strong>CUSA7</strong></div>
+          <div class="row-controls">
+            <button data-action="play" data-target="vid_CUSA7">Play</button>
+            <button data-action="pause" data-target="vid_CUSA7">Pause</button>
+            <button data-action="mute" data-target="vid_CUSA7">Mute</button>
+            <button data-action="unmute" data-target="vid_CUSA7">Unmute</button>
+          </div>
+        </div>
+      </div>
+    
+      <div class="tile" data-name="CUSA8">
+        <div class="video-wrap">
+          <video id="vid_CUSA8" playsinline muted></video>
+        </div>
+        <div class="label">
+          <div><strong>CUSA8</strong></div>
+          <div class="row-controls">
+            <button data-action="play" data-target="vid_CUSA8">Play</button>
+            <button data-action="pause" data-target="vid_CUSA8">Pause</button>
+            <button data-action="mute" data-target="vid_CUSA8">Mute</button>
+            <button data-action="unmute" data-target="vid_CUSA8">Unmute</button>
+          </div>
+        </div>
+      </div>
+    
+      <div class="tile" data-name="CUSA9">
+        <div class="video-wrap">
+          <video id="vid_CUSA9" playsinline muted></video>
+        </div>
+        <div class="label">
+          <div><strong>CUSA9</strong></div>
+          <div class="row-controls">
+            <button data-action="play" data-target="vid_CUSA9">Play</button>
+            <button data-action="pause" data-target="vid_CUSA9">Pause</button>
+            <button data-action="mute" data-target="vid_CUSA9">Mute</button>
+            <button data-action="unmute" data-target="vid_CUSA9">Unmute</button>
+          </div>
+        </div>
+      </div>
+    
+      <div class="tile" data-name="CUSA10">
+        <div class="video-wrap">
+          <video id="vid_CUSA10" playsinline muted></video>
+        </div>
+        <div class="label">
+          <div><strong>CUSA10</strong></div>
+          <div class="row-controls">
+            <button data-action="play" data-target="vid_CUSA10">Play</button>
+            <button data-action="pause" data-target="vid_CUSA10">Pause</button>
+            <button data-action="mute" data-target="vid_CUSA10">Mute</button>
+            <button data-action="unmute" data-target="vid_CUSA10">Unmute</button>
+          </div>
+        </div>
+      </div>
+    
+      <div class="tile" data-name="CUSA11">
+        <div class="video-wrap">
+          <video id="vid_CUSA11" playsinline muted></video>
+        </div>
+        <div class="label">
+          <div><strong>CUSA11</strong></div>
+          <div class="row-controls">
+            <button data-action="play" data-target="vid_CUSA11">Play</button>
+            <button data-action="pause" data-target="vid_CUSA11">Pause</button>
+            <button data-action="mute" data-target="vid_CUSA11">Mute</button>
+            <button data-action="unmute" data-target="vid_CUSA11">Unmute</button>
+          </div>
+        </div>
+      </div>
+    
+    </div>
+  </main>
+  <script>
+    const sources = {
+      "CUSA1": "http://wsc-rtmp-sus.southcentralus.cloudapp.azure.com:1935/CUSA/CUSA1/manifest.m3u8",
+      "CUSA2": "http://wsc-rtmp-sus.southcentralus.cloudapp.azure.com:1935/CUSA/CUSA2/manifest.m3u8",
+      "CUSA3": "http://wsc-rtmp-sus.southcentralus.cloudapp.azure.com:1935/CUSA/CUSA3/manifest.m3u8",
+      "CUSA4": "http://wsc-rtmp-sus.southcentralus.cloudapp.azure.com:1935/CUSA/CUSA4/manifest.m3u8",
+      "CUSA5": "http://wsc-rtmp-sus.southcentralus.cloudapp.azure.com:1935/CUSA/CUSA5/manifest.m3u8",
+      "CUSA6": "http://wsc-rtmp-sus.southcentralus.cloudapp.azure.com:1935/CUSA/CUSA6/manifest.m3u8",
+      "CUSA7": "http://wsc-rtmp-sus.southcentralus.cloudapp.azure.com:1935/CUSA/CUSA7/manifest.m3u8",
+      "CUSA8": "http://wsc-rtmp-sus.southcentralus.cloudapp.azure.com:1935/CUSA/CUSA8/manifest.m3u8",
+      "CUSA9": "http://wsc-rtmp-sus.southcentralus.cloudapp.azure.com:1935/CUSA/CUSA9/manifest.m3u8",
+      "CUSA10": "http://wsc-rtmp-sus.southcentralus.cloudapp.azure.com:1935/CUSA/CUSA10/manifest.m3u8",
+      "CUSA11": "http://wsc-rtmp-sus.southcentralus.cloudapp.azure.com:1935/CUSA/CUSA11/manifest.m3u8",
+    };
+
+    const isSafari = /^((?!chrome|android).)*safari/i.test(navigator.userAgent);
+
+    function initPlayer(video, src) {
+      if (isSafari && video.canPlayType('application/vnd.apple.mpegurl')) {
+        video.src = src;
+      } else if (window.Hls && window.Hls.isSupported()) {
+        const hls = new Hls({ maxBufferLength: 10, liveSyncDuration: 3, enableWorker: true });
+        hls.loadSource(src);
+        hls.attachMedia(video);
+        video.hlsInstance = hls;
+      } else {
+        video.src = src;
+      }
+    }
+
+    // Initialize
+    for (const [name, src] of Object.entries(sources)) {
+      const video = document.getElementById("vid_" + name);
+      video.volume = 0.0;
+      video.muted = true;
+      initPlayer(video, src);
+    }
+
+    // Global controls
+    const allVideos = () => Object.keys(sources).map(n => document.getElementById("vid_" + n));
+
+    document.getElementById("playAll").addEventListener("click", () => {
+      allVideos().forEach(v => { try { v.play(); } catch(e){} });
+    });
+    document.getElementById("pauseAll").addEventListener("click", () => {
+      allVideos().forEach(v => { try { v.pause(); } catch(e){} });
+    });
+    document.getElementById("muteAll").addEventListener("click", () => {
+      allVideos().forEach(v => { v.muted = true; });
+    });
+    document.getElementById("unmuteAll").addEventListener("click", () => {
+      allVideos().forEach(v => { v.muted = false; });
+    });
+    document.getElementById("volume").addEventListener("input", (e) => {
+      const vol = parseFloat(e.target.value);
+      allVideos().forEach(v => { v.volume = vol; });
+    });
+
+    // Row controls
+    document.body.addEventListener("click", (e) => {
+      const btn = e.target.closest("button[data-action]");
+      if (!btn) return;
+      const action = btn.getAttribute("data-action");
+      const targetId = btn.getAttribute("data-target");
+      const vid = document.getElementById(targetId);
+      if (!vid) return;
+      try {
+        if (action === "play") vid.play();
+        if (action === "pause") vid.pause();
+        if (action === "mute") vid.muted = true;
+        if (action === "unmute") vid.muted = false;
+      } catch(_) {}
+    });
+  </script>
+</body>
+</html>
